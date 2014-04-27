@@ -1,47 +1,17 @@
-## …
-     _    _    _
-    /\_\ /\_\ /\_\
-    \/_/ \/_/ \/_/
+# zeekay/dot-files
+My dotfiles, compatible with [ellipsis][ellipsis].
 
-A framework for managing dotfiles.
+## Features
+All the usual suspects. Does not provide any shell or editor configurations. See
+[dot-zsh][zsh], [dot-vim][vim], etc for the rest of my config.
 
-### Install
-Clone and symlink or use handy-dandy installer:
+## Install
+Clone and symlink or install with [ellipsis][ellipsis]:
 
-    curl -sL ellipsis.sh | sh
+```
+$ ellipsis install zeekay/dot-files
+```
 
-You can also specify which modules to install by setting `MODULES` variable, i.e.:
-
-    curl -sL ellipsis.sh | MODULES='vim zsh' sh
-
-### Usage
-The `ellipsis` executable provides a number of useful commands for interacting
-with your dotfiles.
-
-- `ellipsis install`
-    - Install a new ellipsis module.
-- `ellipsis status`
-    - Get current commit of every dotfile module.
-- `ellipsis update`
-    - Update each dotfile module.
-- `ellipsis push`
-    - Push updates to all dotfile modules back to github.
-
-### Configuration
-You can fork this repository and customize or use modules to extend your
-ellipsis installation. You can list additional modules, i.e.:
-`github:user/repo github:user/repo2`, etc.
-
-### Modules
-A module is any github repo which has a `.ellipsis` dir in the root.
-Hooks are just shell scripts which customize how the module behaves.
-
-#### Available hooks
-- `.ellipsis/install`
-    - Controls how module is installed, what files are symlinked into `$HOME`.
-- `.ellipsis/push`
-    - Control how changes to the module are pushed back to github.
-- `.ellipsis/pull`
-    - Control how how changes are pulled in.
-- `.ellipsis/status`
-    - Output current status of module.
+[ellipsis]: http://ellipsis.sh
+[vim]:      https://github.com/zeekay/dot-vim
+[zsh]:      https://github.com/zeekay/dot-zsh

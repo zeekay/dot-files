@@ -1,6 +1,6 @@
 [ui]
 username = zeekay <zeekayy@gmail.com>
-editor = ~/.bin/hgeditor
+editor = ~/.bin/hg-editor
 # ssh = ssh -o ControlMaster=no
 merge = vimdiff-simple
 ignore = ~/.cvsignore
