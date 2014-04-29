@@ -1,23 +1,30 @@
 #!/usr/bin/env bash
 #
-# zeekay/dot-files.
+# zeekay/files
+#
 # Dotfiles for various common bsd/unix utilities.
 
-pkg.install() {
-    ellipsis.link_files "$PKG_PATH/common"
+pkg_deps=(
+    zeekay/zsh
+    zeekay/vim
+    zeekay/irssi
+)
 
-    case "$(utils.platform)" in
-        cygwin*)
-            ellipsis.link_files "$PKG_PATH/platform/cygwin"
+pkg.install() {
+    fs.link_files common
+
+    case $(os.platform) in
+        cygwin)
+            fs.link_files platform/cygwin
             ;;
-        darwin)
-            ellipsis.link_files "$PKG_PATH/platform/osx"
+        osx)
+            fs.link_files platform/osx
             ;;
         freebsd)
-            ellipsis.link_files "$PKG_PATH/platform/freebsd"
+            fs.link_files platform/freebsd
             ;;
         linux)
-            ellipsis.link_files "$PKG_PATH/platform/linux"
+            fs.link_files platform/linux
             ;;
     esac
 }
