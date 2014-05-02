@@ -1,4 +1,4 @@
-# zeekay/dot-files
+# zeekay/files
 My dotfiles, compatible with [ellipsis][ellipsis].
 
 ## Features
@@ -9,7 +9,7 @@ All the usual suspects. Does not provide any shell or editor configurations. See
 Clone and symlink or install with [ellipsis][ellipsis]:
 
 ```
-$ ellipsis install zeekay/dot-files
+$ ellipsis install zeekay/files
 ```
 
 [ellipsis]: http://ellipsis.sh
