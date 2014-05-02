@@ -10,7 +10,7 @@ pkg_deps=(
     zeekay/irssi
 )
 
-pkg.install() {
+pkg.link() {
     fs.link_files common
 
     case $(os.platform) in
