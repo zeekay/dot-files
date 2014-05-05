@@ -1,5 +1,9 @@
-[advice]
-    statusHints     = false
+[user]
+    email           = zk@monoid.io
+    name            = Zach Kelling
+
+[github]
+    user            = zeekay
 
 [alias]
     br              = branch
@@ -34,14 +38,15 @@
 
     catchup         = log --patch --reverse --topo-order _ribbon..origin/master
     changes         = diff --name-status -r
-    new             = !hub create && git push --set-upstream origin master
     current-branch  = !git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||'
-    diffstat        = diff --stat --color=never
     diffall         = diff HEAD --color=never
+    diffstat        = diff --stat --color=never
     fetch-all       = fetch --depth=999999999
     forget          = rm --cached
     lost            = !"git fsck | awk '/dangling commit/ {print $3}' | git show --format='SHA1: %C(yellow)%h%Cblue%d%Creset %s %C(white)%an, %ar%Creset' --stdin | awk '/SHA1/ {sub(\"SHA1: \", \"\"); print}'"
+    new             = !hub create && git push --set-upstream origin master
     pop             = stash pop
+    push-new        = !git push -u origin `git rev-parse --abbrev-ref HEAD`
     record          = !sh -c '(git add -p -- $@ && git commit) || git reset' --
     reset-origin    = !git fetch && git reset --hard "origin/`git rev-parse --abbrev-ref HEAD`"
     ribbon          = tag --force _ribbon origin/master
@@ -53,14 +58,15 @@
     svn-up          = svn rebase
     tags            = tag -l
     track           = checkout -t
-    unstage         = reset HEAD
     undo            = reset --soft HEAD^
+    unstage         = reset HEAD
     unstaged        = diff
-    push-new        = !git push -u origin `git rev-parse --abbrev-ref HEAD`
 
-
-[branch]
-    autosetupmerge  = true
+[core]
+    autocrlf        = false
+    excludesfile    = ~/.cvsignore
+    whitespace      = trailing-space,space-before-tab
+    editor          = git-editor
 
 [color]
     branch          = auto
@@ -69,28 +75,33 @@
     status          = auto
     ui              = auto
 
-[core]
-    autocrlf        = false
-    excludesfile    = ~/.cvsignore
-    whitespace      = trailing-space,space-before-tab
-    editor          = git-editor
+[advice]
+    statusHints     = false
 
-[diff]
-    mnemonicprefix  = true
-    renames         = copies
+[branch]
+    autosetupmerge  = true
 
-[gist]
-    browse          = true
+[push]
+    default         = tracking
 
-[github]
-    password        = !security 2>&1 >/dev/null find-generic-password -gs github.password | ruby -e 'print $1 if STDIN.gets =~ /^password: \\\"(.*)\\\"$/'
-    user            = zeekay
+[rebase]
+    autosquash      = true
+
+[rerere]
+    enabled         = false
+
+[credential]
+	helper          = cache
 
 [grep]
     lineNumber      = true
 
 [instaweb]
     httpd           = webrick
+
+[diff]
+    mnemonicprefix  = true
+    renames         = copies
 
 [merge]
     stat            = true
@@ -102,19 +113,8 @@
 [mergetool "vim"]
     cmd             = vim -u ~/.vimgitrc "+Gdiff" $MERGED -c '"call vice#git#merge()"'
 
-[push]
-    default         = tracking
-
-[rebase]
-    autosquash      = true
-
-[rerere]
-    enabled         = false
-
-[user]
-    email           = zk@monoid.io
-    name            = Zach Kelling
-[credential]
-	helper = cache
 [hub]
-	protocol = https
+    protocol        = ssh
+
+[gist]
+    browse          = true
