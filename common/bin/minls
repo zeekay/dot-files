@@ -1,0 +1,152 @@
+#!/usr/bin/env python2
+import argparse
+import gzip
+import os.path
+import subprocess
+
+try:
+    import xml.etree.cElementTree as ET
+except ImportError:
+    import xml.etree.ElementTree as ET
+
+
+class FileRef(object):
+    '''
+    An object representing an ALS FileRef element.
+    '''
+    uncompressed_exts = set(('wav', 'aif'))
+
+    def __init__(self, el):
+        self.el = el
+        self.exists = True
+        self.path = self.get_abspath()
+
+    @property
+    def is_uncompressed(self):
+        '''
+        Returns true if uncompressed file.
+        '''
+        return self.ext in self.uncompressed_exts
+
+    @property
+    def ext(self):
+        '''
+        Returns file extension.
+        '''
+        try:
+            return self.name.rsplit('.', 1)[1]
+        except IndexError:
+            return ''
+
+    @property
+    def name(self):
+        '''
+        Returns Name element's Value attribute.
+        '''
+        return self.el.find('Name').attrib['Value']
+
+    @name.setter
+    def name(self, value):
+        '''
+        Set Name element's Value attribute.
+        '''
+        self.el.find('Name').attrib['Value'] = value
+
+    def get_abspath(self):
+        '''
+        Returns relative dirname, Exception is raised if container dir does not exist.
+        '''
+        rp = self.el.find('RelativePath')
+        rd = d = '/'.join(e.attrib['Dir'] for e in rp.getchildren()).lstrip('/')
+
+        # Go up at most 3 levels searching for absolute path to container
+        levels = 0
+        while not os.path.isdir(d):
+            d = '../' + d
+            levels += 1
+            if levels == 3:
+                self.exists = False
+                return '/'.join((rd, self.name))
+
+        return '/'.join((os.path.abspath(d), self.name))
+
+
+class LiveSet(object):
+    '''
+    An object representing an Ableton Live set.
+    '''
+    def __init__(self, path):
+        self.path  = path
+        self.etree = ET.parse(gzip.GzipFile(path))
+
+    def iter_files(self):
+        '''
+        Lazily yield all FileRef elements.
+        '''
+        for f in self.etree.iterfind('.//FileRef'):
+            f = FileRef(f)
+            if f.exists:
+                yield f
+
+    def iter_uncompressed_files(self):
+        '''
+        Lazily yield all uncompressed FileRef elements.
+        '''
+        for f in self.iter_files():
+            if f.is_uncompressed:
+                yield f
+
+    @property
+    def files(self):
+        '''
+        Wrapper around self.iter_files, returning all FileRefs.
+        '''
+        return list(self.iter_files())
+
+    @property
+    def uncompressed_files(self):
+        '''
+        Wrapper around self.iter_files, returning all FileRefs.
+        '''
+        return list(self.iter_uncompressed_files())
+
+    def save(self, path=None):
+        '''
+        Gzips and writes Live set to disk.
+        '''
+        if not path:
+            path = self.path
+
+        f = gzip.open(path, 'wb')
+        self.etree.write(f, encoding='UTF-8', xml_declaration=True)
+        f.close()
+
+    def compress_files(self, rm=False):
+        '''
+        Compress all uncompressed files in project with Flac.
+        '''
+        seen = set()
+        for f in als.uncompressed_files:
+            print f.name
+            if not f.path in seen:
+                seen.add(f.path)
+
+            print 'Compressing %s...' % f.path
+            if subprocess.call(['flac', '-s', f.path]):
+                f.name = '.'.join([f.name.rsplit('.')[0], 'flac'])
+                if rm:
+                    os.remove(f.path)
+
+
+parser = argparse.ArgumentParser()
+parser.add_argument('als', help='Ableton Live Set (.als)')
+parser.add_argument('--rm', help='Remove uncompressed files after compression')
+
+if __name__ == '__main__':
+    args = parser.parse_args()
+
+    als = LiveSet(args.als)
+    als.compress_files(args.rm)
+    print 'Saving...'
+    als.save()
+    print 'Done!'
