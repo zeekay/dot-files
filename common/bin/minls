@@ -1,4 +1,8 @@
 #!/usr/bin/env python2
+#
+# minls
+#
+# Compress Ableton Live sets using Flac compression.
 import argparse
 import gzip
 import os.path
