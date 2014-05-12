@@ -144,7 +144,8 @@ class LiveSet(object):
 
 parser = argparse.ArgumentParser()
 parser.add_argument('als', help='Ableton Live Set (.als)')
-parser.add_argument('--rm', help='Remove uncompressed files after compression')
+parser.add_argument('--rm', help='Remove uncompressed files after compression', action='store_true')
+parser.set_defaults(rm=False)
 
 if __name__ == '__main__':
     args = parser.parse_args()
