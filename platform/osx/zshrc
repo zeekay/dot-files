@@ -26,14 +26,11 @@ alias ack=ag
 alias cake=shortcake
 alias cask='brew cask'
 alias clj='lein repl'
-alias git='noglob hub'
 alias hd='noglob hoodoo'
 alias http='noglob http'
 alias sl=ls
 alias utc='date -u'
 alias v=vim
-
-zstyle ':vcs_info:git:*:-all-' command /usr/local/bin/git
 
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
