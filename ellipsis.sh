@@ -32,4 +32,14 @@ pkg.link() {
 pkg.install() {
     git config --global --unset-all include.path '~/.gitinclude'
     git config --global --add include.path '~/.gitinclude'
+    cat <<\EOF
+
+Included ~/.gitinclude in your ~/.gitconfig automatically. You can manually set
+user.email, user.name, and github.username with `git config`:
+
+    git config --global user.name "Zach Kelling"
+    git config --global user.email "zk@monoid.io"
+    git config --global github.username "zeekay"
+
+EOF
 }
