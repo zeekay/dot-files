@@ -30,6 +30,6 @@ pkg.link() {
 }
 
 pkg.install() {
-    echo "Including ~/.gitinclude in ~/.gitconfig"
-    git config --global include.path '~/.gitinclude'
+    git config --global --unset-all include.path '~/.gitinclude'
+    git config --global --add include.path '~/.gitinclude'
 }

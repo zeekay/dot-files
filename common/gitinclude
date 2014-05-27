@@ -98,13 +98,6 @@
 
 [merge]
     stat            = true
-    tool            = vim
-
-[mergetool]
-    keepBackup      = false
-
-[mergetool "vim"]
-    cmd             = vim -u ~/.vimgitrc "+Gdiff" $MERGED -c '"call vice#git#merge()"'
 
 [hub]
     protocol        = ssh
