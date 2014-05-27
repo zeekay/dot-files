@@ -10,22 +10,22 @@ var path            = require('path'),
 // /usr/lib/node_modules.
 function findModule(modPath) {
   try {
-    require.resolve(modPath);
+    return require.resolve(modPath);
   } catch (err) {
     modPath = path.join('/usr/local/lib/node_modules', modPath)
   }
 
   // Then look in /usr/lib
   try {
-    require.resolve(modPath);
+    return require.resolve(modPath);
   } catch (err) {
     modPath = modPath.replace('/usr/local/lib', '/usr/lib')
   }
 
-  require.resolve(modPath)
-  return modPath
+  return require.resolve(modPath)
 }
 
+// Use cake
 function cake() {
   try {
     require(findModule(cakeModule)).run()
@@ -37,10 +37,12 @@ function cake() {
   }
 }
 
+// Use shortcake
 function shortcake() {
   require(findModule(shortcakeModule))
 }
 
+// Try shortcake, fallback to cake.
 try {
   shortcake()
 } catch (err) {
