@@ -28,3 +28,8 @@ pkg.link() {
             ;;
     esac
 }
+
+pkg.install() {
+    echo "Including ~/.gitinclude in ~/.gitconfig"
+    git config --global include.path '~/.gitinclude'
+}

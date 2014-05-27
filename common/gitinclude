@@ -111,3 +111,5 @@
 
 [gist]
     browse          = true
+
+# vim: ft=gitconfig
