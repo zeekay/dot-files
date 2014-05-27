@@ -1,31 +1,29 @@
 #!/usr/bin/env node
-// Wrapper around cake that will try to use shortcake if it's installed,
-// otherwise swap arguments around so tasks are always last.
-
+// Wrapper around cake that will use shortcake if it's installed, otherwise
+// swap arguments around so tasks are always last.
 var path            = require('path'),
     cakeModule      = 'coffee-script/lib/coffee-script/cake',
     shortcakeModule = 'shortcake/lib/cli';
 
-// Try to find module locally, then in /usr/local/lib/node_modules, then
-// /usr/lib/node_modules.
+// Look in all the usual places for our module.
 function findModule(modPath) {
   try {
-    require.resolve(modPath);
+    return require.resolve(modPath);
   } catch (err) {
     modPath = path.join('/usr/local/lib/node_modules', modPath)
   }
 
   // Then look in /usr/lib
   try {
-    require.resolve(modPath);
+    return require.resolve(modPath);
   } catch (err) {
     modPath = modPath.replace('/usr/local/lib', '/usr/lib')
   }
 
-  require.resolve(modPath)
-  return modPath
+  return require.resolve(modPath)
 }
 
+// Process args with cake.
 function cake() {
   try {
     require(findModule(cakeModule)).run()
@@ -37,13 +35,16 @@ function cake() {
   }
 }
 
+// Process args with shortcake.
 function shortcake() {
   require(findModule(shortcakeModule))
 }
 
+// Try to use shortcake, if that fails use cake.
 try {
   shortcake()
 } catch (err) {
+  console.log('warning: Unable to find shortcake, falling back to cake.')
   cake()
 }
 
