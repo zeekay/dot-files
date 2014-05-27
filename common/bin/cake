@@ -1,30 +1,50 @@
 #!/usr/bin/env node
-path = require('path');
+// Wrapper around cake that will try to use shortcake if it's installed,
+// otherwise swap arguments around so tasks are always last.
 
-// Treat first argument to cake as task name, push it to the end so cake agrees
-if (process.argv[2] && process.argv[2].charAt(0) !== '-') process.argv.push(process.argv.splice(2, 1)[0])
+var path            = require('path'),
+    cakeModule      = 'coffee-script/lib/coffee-script/cake',
+    shortcakeModule = 'shortcake/lib/cli';
 
-var cakeModule = 'coffee-script/lib/coffee-script/cake';
+// Try to find module locally, then in /usr/local/lib/node_modules, then
+// /usr/lib/node_modules.
+function findModule(modPath) {
+  try {
+    require.resolve(modPath);
+  } catch (err) {
+    modPath = path.join('/usr/local/lib/node_modules', modPath)
+  }
 
-try {
-    require.resolve(cakeModule);
-} catch (err) {
-    cakeModule = path.join('/usr/local/lib/node_modules', cakeModule)
+  // Then look in /usr/lib
+  try {
+    require.resolve(modPath);
+  } catch (err) {
+    modPath = modPath.replace('/usr/local/lib', '/usr/lib')
+  }
+
+  require.resolve(modPath)
+  return modPath
+}
+
+function cake() {
+  try {
+    require(findModule(cakeModule)).run()
+  } catch (err) {
+    if (/Cakefile not found in/.test(err.message))
+      console.log(err.message)
+    else
+      throw err
+  }
+}
+
+function shortcake() {
+  require(findModule(shortcakeModule))
 }
 
 try {
-    require.resolve(cakeModule);
+  shortcake()
 } catch (err) {
-    cakeModule = cakeModule.replace('/usr/local/lib', '/usr/lib')
-}
-
-try {
-    require(cakeModule).run();
-} catch (err) {
-  if (/Cakefile not found in/.test(err.message))
-    console.log(err.message)
-  else
-    throw err
+  cake()
 }
 
 // vim: ft=javascript:
