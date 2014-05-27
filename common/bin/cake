@@ -23,7 +23,7 @@ function findModule(modPath) {
   return require.resolve(modPath)
 }
 
-// Process args with cake.
+// Use cake
 function cake() {
   try {
     require(findModule(cakeModule)).run()
@@ -35,12 +35,12 @@ function cake() {
   }
 }
 
-// Process args with shortcake.
+// Use shortcake
 function shortcake() {
   require(findModule(shortcakeModule))
 }
 
-// Try to use shortcake, if that fails use cake.
+// Try shortcake, fallback to cake.
 try {
   shortcake()
 } catch (err) {
