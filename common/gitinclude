@@ -59,7 +59,6 @@
     autocrlf        = false
     excludesfile    = ~/.cvsignore
     whitespace      = trailing-space,space-before-tab
-    editor          = git-editor
 
 [color]
     branch          = auto
