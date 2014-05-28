@@ -29,17 +29,23 @@ pkg.link() {
     esac
 }
 
-pkg.install() {
-    git config --global --unset-all include.path '~/.gitinclude'
-    git config --global --add include.path '~/.gitinclude'
-    cat <<\EOF
+git-configured() {
+    for key in user.name user.email github.user; do
+        if [ -z "$(git config --global $key | cat)"  ]; then
+            return 1
+        fi
+    done
+    return 0
+}
 
-Included ~/.gitinclude in your ~/.gitconfig automatically. You can manually set
-user.email, user.name, and github.username with `git config`:
+pkg.install() {
+    git.add_include '~/.gitinclude'
+
+    git.configured || cat <<\EOF
+You should set your email, name and github user for git with `git config`:
 
     git config --global user.name "Zach Kelling"
     git config --global user.email "zk@monoid.io"
-    git config --global github.username "zeekay"
-
+    git config --global github.user "zeekay"
 EOF
 }
