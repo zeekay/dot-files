@@ -74,7 +74,7 @@
     autosetupmerge  = true
 
 [push]
-    default         = tracking
+    default         = current
 
 [rebase]
     autosquash      = true
