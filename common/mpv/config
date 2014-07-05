@@ -1,1 +1,5 @@
-# Write your default config options here!
+# Use 16MB input cache for everything, even local files.
+cache=16384
+
+# Use 32MB cache for network streams only.
+cache-default=32768
