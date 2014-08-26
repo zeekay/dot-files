@@ -1,6 +1,6 @@
 *.pyc
 common/ghc/ghci_history
-common/ghc/x86_64-darwin-7.6.3
+common/ghc/x86_64-darwin-*
 common/ipython/README
 common/ipython/profile_default/db/
 common/ipython/profile_default/history.sqlite
