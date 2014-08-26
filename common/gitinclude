@@ -54,6 +54,7 @@
     undo            = reset --soft HEAD^
     unstage         = reset HEAD
     unstaged        = diff
+    git2ssh         = !cat "$(git rev-parse --git-dir)/config" | sed -e 's/url = git:/url = ssh:/' > /tmp/config && mv /tmp/config "$(git rev-parse --git-dir)/config"
 
 [core]
     autocrlf        = false
