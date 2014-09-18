@@ -6,5 +6,6 @@ common/ipython/profile_default/db/
 common/ipython/profile_default/history.sqlite
 common/ipython/profile_default/startup/
 common/ipython/profile_default/static/
+common/ipython/profile_haskell/
 common/matplotlib/fontList.cache
 platform/osx/alfred/Alfred.alfredpreferences/workflows/alfred-github-workflow
