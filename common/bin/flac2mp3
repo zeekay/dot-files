@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+for orig in "$@"
+do
+    flac --decode --stdout "$orig" | lame -b 320 - "${orig%.flac}.mp3"
+done
