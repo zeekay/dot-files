@@ -32,10 +32,12 @@
     catchup         = log --patch --reverse --topo-order _ribbon..origin/master
     changes         = diff --name-status -r
     current-branch  = !git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||'
+    delete-merged   = !git pull --prune && git branch --merged | grep -v '*' | xargs -n 1 git branch -d
     diffall         = diff HEAD --color=never
     diffstat        = diff --stat --color=never
     fetch-all       = fetch --depth=999999999
     forget          = rm --cached
+    git2ssh         = !cat "$(git rev-parse --git-dir)/config" | sed -e 's/url = git:/url = ssh:/' > /tmp/config && mv /tmp/config "$(git rev-parse --git-dir)/config"
     lost            = !"git fsck | awk '/dangling commit/ {print $3}' | git show --format='SHA1: %C(yellow)%h%Cblue%d%Creset %s %C(white)%an, %ar%Creset' --stdin | awk '/SHA1/ {sub(\"SHA1: \", \"\"); print}'"
     new             = !hub create && git push --set-upstream origin master
     pop             = stash pop
@@ -54,7 +56,6 @@
     undo            = reset --soft HEAD^
     unstage         = reset HEAD
     unstaged        = diff
-    git2ssh         = !cat "$(git rev-parse --git-dir)/config" | sed -e 's/url = git:/url = ssh:/' > /tmp/config && mv /tmp/config "$(git rev-parse --git-dir)/config"
 
 [core]
     autocrlf        = false
