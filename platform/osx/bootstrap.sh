@@ -54,6 +54,7 @@ brew install \
     z \
     zeromq
 
+brew install llvm --with-clang --with-asan
 brew install zsh --disable-etcdir
 brew install --HEAD ffmpeg
 brew install --HEAD https://raw.github.com/pigoz/homebrew-mplayer2/master/Formula/mplayer2.rb
