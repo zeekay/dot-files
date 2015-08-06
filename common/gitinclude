@@ -77,7 +77,7 @@
     autosetupmerge  = true
 
 [push]
-    default         = current
+    default         = matching
 
 [rebase]
     autosquash      = true
@@ -86,7 +86,7 @@
     enabled         = false
 
 [credential]
-	helper          = cache
+	helper = cache --timeout=31536000
 
 [grep]
     lineNumber      = true
