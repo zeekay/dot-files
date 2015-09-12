@@ -1,6 +1,5 @@
 #!/usr/bin/env node
-// Wrapper around cake that will use shortcake if it's installed, otherwise
-// swap arguments around so tasks are always last.
+// Wrapper around cake that tries to use shortcake.
 var path            = require('path'),
     cakeModule      = 'coffee-script/lib/coffee-script/cake',
     shortcakeModule = 'shortcake/lib/cli';
