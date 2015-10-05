@@ -77,7 +77,7 @@
     autosetupmerge  = true
 
 [push]
-    default         = matching
+    default         = simple
 
 [rebase]
     autosquash      = true
