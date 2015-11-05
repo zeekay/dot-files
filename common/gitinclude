@@ -56,6 +56,7 @@
     undo            = reset --soft HEAD^
     unstage         = reset HEAD
     unstaged        = diff
+    unstash         = stash apply
 
 [core]
     autocrlf        = false
