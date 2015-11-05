@@ -1,10 +1,13 @@
 {
+  "ecmaVersion": 6,
   "libs": [
     "browser",
     "jquery"
   ],
   "plugins": {
     "coffee": {},
-    "node": {}
+    "modules": {},
+    "node": {},
+    "node_resolve": {}
   }
 }
