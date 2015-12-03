@@ -1,8 +1,6 @@
 [alias]
     br              = branch
     ci              = commit
-    ci-ours         = checkout --ours   && git add -u && git commit
-    ci-theirs       = checkout --theirs && git add -u && git commit
     co              = checkout
     co-ours         = checkout --ours
     co-theirs       = checkout --theirs
@@ -35,8 +33,6 @@
 
     catchup         = log --patch --reverse --topo-order _ribbon..origin/master
     changes         = diff --name-status -r
-    commit-ours     = checkout --ours   && git add -u && git commit
-    commit-theirs   = checkout --theirs && git add -u && git commit
     current-branch  = !git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||'
     delete-merged   = !git pull --prune && git branch --merged | grep -v '*' | xargs -n 1 git branch -d
     diffall         = diff HEAD --color=never
@@ -45,6 +41,8 @@
     forget          = rm --cached
     git2ssh         = !cat "$(git rev-parse --git-dir)/config" | sed -e 's/url = git:/url = ssh:/' > /tmp/config && mv /tmp/config "$(git rev-parse --git-dir)/config"
     lost            = !"git fsck | awk '/dangling commit/ {print $3}' | git show --format='SHA1: %C(yellow)%h%Cblue%d%Creset %s %C(white)%an, %ar%Creset' --stdin | awk '/SHA1/ {sub(\"SHA1: \", \"\"); print}'"
+    merge-ours      = !git checkout --ours   . && git add -u && git commit
+    merge-theirs    = !git checkout --theirs . && git add -u && git commit
     new             = !hub create && git push --set-upstream origin master
     pop             = stash pop
     push-new        = !git push -u origin `git rev-parse --abbrev-ref HEAD`
