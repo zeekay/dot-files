@@ -1,7 +1,11 @@
 [alias]
     br              = branch
     ci              = commit
+    ci-ours         = checkout --ours   && git add -u && git commit
+    ci-theirs       = checkout --theirs && git add -u && git commit
     co              = checkout
+    co-ours         = checkout --ours
+    co-theirs       = checkout --theirs
     coi             = checkout-index
     coi-ours        = checkout-index -f -a --stage=2
     coi-theirs      = checkout-index -f -a --stage=3
@@ -31,6 +35,8 @@
 
     catchup         = log --patch --reverse --topo-order _ribbon..origin/master
     changes         = diff --name-status -r
+    commit-ours     = checkout --ours   && git add -u && git commit
+    commit-theirs   = checkout --theirs && git add -u && git commit
     current-branch  = !git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||'
     delete-merged   = !git pull --prune && git branch --merged | grep -v '*' | xargs -n 1 git branch -d
     diffall         = diff HEAD --color=never
