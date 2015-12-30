@@ -4,12 +4,6 @@
 #
 # Dotfiles for various common bsd/unix utilities.
 
-pkg_deps=(
-    zeekay/zsh
-    zeekay/vim
-    zeekay/irssi
-)
-
 pkg.link() {
     fs.link_files common
 
