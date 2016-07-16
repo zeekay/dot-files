@@ -9,3 +9,4 @@ common/ipython/profile_default/static/
 common/ipython/profile_haskell/
 common/matplotlib/fontList.cache
 platform/osx/alfred/Alfred.alfredpreferences/workflows/alfred-github-workflow
+common/mpv/watch_later

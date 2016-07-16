@@ -29,6 +29,7 @@
 # referring to the module name (which must be in the PYTHONPATH) as
 # 'module://my_backend'
 backend : MacOSX
+# backend : CocoaAgg
 
 # if you are runing pyplot inside a GUI and your backend choice
 # conflicts, we will automatically try and find a compatible one for
@@ -219,10 +220,10 @@ axes.color_cycle : 348ABD, 7A68A6, A60628, 467821, CF4457, 188487, E24A33
                       # A60628 : red
                       # CF4457 : pink
                       # 467821 : green
-                                            
-                                            
-                                            
-                                            
+
+
+
+
                                             # color cycle for plot lines
                                             # as list of string colorspecs:
                                             # single letter, long name, or
