@@ -1,374 +1,468 @@
-# Configuration file for ipython.
-
 c = get_config()
+# Configuration file for ipython-kernel.
 
 #------------------------------------------------------------------------------
-# InteractiveShellApp configuration
+# ConnectionFileMixin(LoggingConfigurable) configuration
 #------------------------------------------------------------------------------
 
-# A Mixin for applications that start InteractiveShell instances.
+## Mixin for configurable classes that work with connection files
+
+## JSON file in which to store connection info [default: kernel-<pid>.json]
 #
-# Provides configurables for loading extensions and executing files as part of
-# configuring a Shell environment.
-#
-# Provides init_extensions() and init_code() methods, to be called after
-# init_shell(), which must be implemented by subclasses.
+#  This file will contain the IP, ports, and authentication key needed to connect
+#  clients to this kernel. By default, this file will be created in the security
+#  dir of the current profile, but can be specified by absolute path.
+#c.ConnectionFileMixin.connection_file = ''
 
-# Execute the given command string.
-# c.InteractiveShellApp.code_to_run = ''
+## set the control (ROUTER) port [default: random]
+#c.ConnectionFileMixin.control_port = 0
 
-# lines of code to run at IPython startup.
-# c.InteractiveShellApp.exec_lines = []
+## set the heartbeat port [default: random]
+#c.ConnectionFileMixin.hb_port = 0
 
-# If true, an 'import *' is done from numpy and pylab, when using pylab
-# c.InteractiveShellApp.pylab_import_all = True
+## set the iopub (PUB) port [default: random]
+#c.ConnectionFileMixin.iopub_port = 0
 
-# A list of dotted module names of IPython extensions to load.
-c.InteractiveShellApp.extensions = ['autoreload']
+## Set the kernel's IP address [default localhost]. If the IP address is
+#  something other than localhost, then Consoles on other machines will be able
+#  to connect to the Kernel, so be careful!
+#c.ConnectionFileMixin.ip = u''
 
-# dotted module name of an IPython extension to load.
-# c.InteractiveShellApp.extra_extension = ''
+## set the shell (ROUTER) port [default: random]
+#c.ConnectionFileMixin.shell_port = 0
 
-# List of files to run at IPython startup.
-# c.InteractiveShellApp.exec_files = []
+## set the stdin (ROUTER) port [default: random]
+#c.ConnectionFileMixin.stdin_port = 0
 
-# A file to be run
-# c.InteractiveShellApp.file_to_run = ''
+##
+#c.ConnectionFileMixin.transport = 'tcp'
 
 #------------------------------------------------------------------------------
-# TerminalIPythonApp configuration
+# InteractiveShellApp(Configurable) configuration
 #------------------------------------------------------------------------------
 
-# TerminalIPythonApp will inherit config from: BaseIPythonApplication,
-# Application, InteractiveShellApp
+## A Mixin for applications that start InteractiveShell instances.
+#
+#  Provides configurables for loading extensions and executing files as part of
+#  configuring a Shell environment.
+#
+#  The following methods should be called by the :meth:`initialize` method of the
+#  subclass:
+#
+#    - :meth:`init_path`
+#    - :meth:`init_shell` (to be implemented by the subclass)
+#    - :meth:`init_gui_pylab`
+#    - :meth:`init_extensions`
+#    - :meth:`init_code`
 
-# Execute the given command string.
-# c.TerminalIPythonApp.code_to_run = ''
+## Execute the given command string.
+#c.InteractiveShellApp.code_to_run = ''
 
-# The IPython profile to use.
-# c.TerminalIPythonApp.profile = u'default'
+## Run the file referenced by the PYTHONSTARTUP environment variable at IPython
+#  startup.
+#c.InteractiveShellApp.exec_PYTHONSTARTUP = True
 
-# Set the log level by value or name.
-# c.TerminalIPythonApp.log_level = 30
+## List of files to run at IPython startup.
+#c.InteractiveShellApp.exec_files = []
 
-# lines of code to run at IPython startup.
-# c.TerminalIPythonApp.exec_lines = []
+## lines of code to run at IPython startup.
+#c.InteractiveShellApp.exec_lines = []
 
-# Enable GUI event loop integration ('qt', 'wx', 'gtk', 'glut', 'pyglet').
-# c.TerminalIPythonApp.gui = 'qt'
+## A list of dotted module names of IPython extensions to load.
+#c.InteractiveShellApp.extensions = []
 
-# Pre-load matplotlib and numpy for interactive use, selecting a particular
-# matplotlib backend and loop integration.
-# c.TerminalIPythonApp.pylab = None
+## dotted module name of an IPython extension to load.
+#c.InteractiveShellApp.extra_extension = ''
 
-# Suppress warning messages about legacy config files
-# c.TerminalIPythonApp.ignore_old_config = False
+## A file to be run
+#c.InteractiveShellApp.file_to_run = ''
 
-# Create a massive crash report when IPython enconters what may be an internal
-# error.  The default is to append a short message to the usual traceback
-# c.TerminalIPythonApp.verbose_crash = False
+## Enable GUI event loop integration with any of ('glut', 'gtk', 'gtk2', 'gtk3',
+#  'osx', 'pyglet', 'qt', 'qt4', 'qt5', 'tk', 'wx', 'gtk2', 'qt4').
+#c.InteractiveShellApp.gui = None
 
-# If a command or file is given via the command-line, e.g. 'ipython foo.py
-# c.TerminalIPythonApp.force_interact = False
+## Should variables loaded at startup (by startup files, exec_lines, etc.) be
+#  hidden from tools like %who?
+#c.InteractiveShellApp.hide_initial_ns = True
 
-# If true, an 'import *' is done from numpy and pylab, when using pylab
-# c.TerminalIPythonApp.pylab_import_all = True
+## Configure matplotlib for interactive use with the default matplotlib backend.
+#c.InteractiveShellApp.matplotlib = None
 
-# The name of the IPython directory. This directory is used for logging
-# configuration (through profiles), history storage, etc. The default is usually
-# $HOME/.ipython. This options can also be specified through the environment
-# variable IPYTHON_DIR.
-# c.TerminalIPythonApp.ipython_dir = u'/Volumes/Data/zk/.ipython'
+## Run the module as a script.
+#c.InteractiveShellApp.module_to_run = ''
 
-# Whether to display a banner upon starting IPython.
-# c.TerminalIPythonApp.display_banner = True
+## Pre-load matplotlib and numpy for interactive use, selecting a particular
+#  matplotlib backend and loop integration.
+#c.InteractiveShellApp.pylab = None
 
-# Start IPython quickly by skipping the loading of config files.
-# c.TerminalIPythonApp.quick = False
+## If true, IPython will populate the user namespace with numpy, pylab, etc. and
+#  an ``import *`` is done from numpy and pylab, when using pylab mode.
+#
+#  When False, pylab mode should not import any names into the user namespace.
+#c.InteractiveShellApp.pylab_import_all = True
 
-# A list of dotted module names of IPython extensions to load.
-# c.TerminalIPythonApp.extensions = []
-
-# Whether to install the default config files into the profile dir. If a new
-# profile is being created, and IPython contains config files for that profile,
-# then they will be staged into the new directory.  Otherwise, default config
-# files will be automatically generated.
-# c.TerminalIPythonApp.copy_config_files = False
-
-# dotted module name of an IPython extension to load.
-# c.TerminalIPythonApp.extra_extension = ''
-
-# List of files to run at IPython startup.
-# c.TerminalIPythonApp.exec_files = []
-
-# Whether to overwrite existing config files when copying
-# c.TerminalIPythonApp.overwrite = False
-
-# A file to be run
-# c.TerminalIPythonApp.file_to_run = ''
+## Reraise exceptions encountered loading IPython extensions?
+#c.InteractiveShellApp.reraise_ipython_extension_failures = False
 
 #------------------------------------------------------------------------------
-# TerminalInteractiveShell configuration
+# Application(SingletonConfigurable) configuration
 #------------------------------------------------------------------------------
 
-# TerminalInteractiveShell will inherit config from: InteractiveShell
+## This is an application.
 
-# auto editing of files with syntax errors.
-# c.TerminalInteractiveShell.autoedit_syntax = False
+## The date format used by logging formatters for %(asctime)s
+#c.Application.log_datefmt = '%Y-%m-%d %H:%M:%S'
 
-# Use colors for displaying information about objects. Because this information
-# is passed through a pager (like 'less'), and some pagers get confused with
-# color codes, this capability can be turned off.
-# c.TerminalInteractiveShell.color_info = True
+## The Logging format template
+#c.Application.log_format = '[%(name)s]%(highlevel)s %(message)s'
 
-#
-# c.TerminalInteractiveShell.history_length = 10000
-
-# Show rewritten input, e.g. for autocall.
-# c.TerminalInteractiveShell.show_rewritten_input = True
-
-# Set the color scheme (NoColor, Linux, or LightBG).
-c.TerminalInteractiveShell.colors = 'LightBG'
-
-# Autoindent IPython code entered interactively.
-c.TerminalInteractiveShell.autoindent = True
-
-#
-# c.TerminalInteractiveShell.separate_in = '\n'
-
-# Deprecated, use PromptManager.in2_template
-# c.TerminalInteractiveShell.prompt_in2 = '   .\\D.: '
-
-#
-# c.TerminalInteractiveShell.separate_out = ''
-
-# Deprecated, use PromptManager.in_template
-# c.TerminalInteractiveShell.prompt_in1 = 'In [\\#]: '
-
-# Enable deep (recursive) reloading by default. IPython can use the deep_reload
-# module which reloads changes in modules recursively (it replaces the reload()
-# function, so you don't need to change anything to use it). deep_reload()
-# forces a full reload of modules whose code may have changed, which the default
-# reload() function does not.  When deep_reload is off, IPython will use the
-# normal reload(), but deep_reload will still be available as dreload().
-c.TerminalInteractiveShell.deep_reload = True
-
-# Make IPython automatically call any callable object even if you didn't type
-# explicit parentheses. For example, 'str 43' becomes 'str(43)' automatically.
-# The value can be '0' to disable the feature, '1' for 'smart' autocall, where
-# it is not applied if there are no more arguments on the line, and '2' for
-# 'full' autocall, where all callable objects are automatically called (even if
-# no arguments are present). The default is '1'.
-# c.TerminalInteractiveShell.autocall = 1
-
-# Number of lines of your screen, used to control printing of very long strings.
-# Strings longer than this number of lines will be sent through a pager instead
-# of directly printed.  The default value for this is 0, which means IPython
-# will auto-detect your screen size every time it needs to print certain
-# potentially long strings (this doesn't change the behavior of the 'print'
-# keyword, it's only triggered internally). If for some reason this isn't
-# working well (it needs curses support), specify it yourself. Otherwise don't
-# change the default.
-# c.TerminalInteractiveShell.screen_length = 0
-
-# Set the editor used by IPython (default to $EDITOR/vi/notepad).
-# c.TerminalInteractiveShell.editor = 'vim'
-c.IPythonWidget.editor = 'gvim'
-
-# Deprecated, use PromptManager.justify
-# c.TerminalInteractiveShell.prompts_pad_left = True
-
-# The part of the banner to be printed before the profile
-c.TerminalInteractiveShell.banner1 = ''
-
-# c.TerminalInteractiveShell.readline_parse_and_bind = ['tab: complete', '"\\C-l": clear-screen', 'set show-all-if-ambiguous on', '"\\C-o": tab-insert', '"\\C-r": reverse-search-history', '"\\C-s": forward-search-history', '"\\C-p": history-search-backward', '"\\C-n": history-search-forward', '"\\e[A": history-search-backward', '"\\e[B": history-search-forward', '"\\C-k": kill-line', '"\\C-u": unix-line-discard']
-
-# The part of the banner to be printed after the profile
-# c.TerminalInteractiveShell.banner2 = ''
-
-#
-# c.TerminalInteractiveShell.separate_out2 = ''
-
-#
-# c.TerminalInteractiveShell.wildcards_case_sensitive = True
-
-#
-# c.TerminalInteractiveShell.debug = False
-
-# Set to confirm when you try to exit IPython with an EOF (Control-D in Unix,
-# Control-Z/Enter in Windows). By typing 'exit' or 'quit', you can force a
-# direct exit without any confirmation.
-c.TerminalInteractiveShell.confirm_exit = False
-
-#
-# c.TerminalInteractiveShell.ipython_dir = ''
-
-#
-# c.TerminalInteractiveShell.readline_remove_delims = '-/~'
-
-# Start logging to the default log file.
-# c.TerminalInteractiveShell.logstart = False
-
-# The name of the logfile to use.
-# c.TerminalInteractiveShell.logfile = ''
-
-# The shell program to be used for paging.
-# c.TerminalInteractiveShell.pager = 'less'
-
-# Enable magic commands to be called without the leading %.
-# c.TerminalInteractiveShell.automagic = True
-
-# Save multi-line entries as one entry in readline history
-# c.TerminalInteractiveShell.multiline_history = True
-
-#
-# c.TerminalInteractiveShell.readline_use = True
-
-# Start logging to the given file in append mode.
-# c.TerminalInteractiveShell.logappend = ''
-
-#
-# c.TerminalInteractiveShell.xmode = 'Context'
-
-#
-# c.TerminalInteractiveShell.quiet = False
-
-# Enable auto setting the terminal title.
-# c.TerminalInteractiveShell.term_title = False
-
-#
-# c.TerminalInteractiveShell.object_info_string_level = 0
-
-# Deprecated, use PromptManager.out_template
-# c.TerminalInteractiveShell.prompt_out = 'Out[\\#]: '
-
-# Set the size of the output cache.  The default is 1000, you can change it
-# permanently in your config file.  Setting it to 0 completely disables the
-# caching system, and the minimum value accepted is 20 (if you provide a value
-# less than 20, it is reset to 0 and a warning is issued).  This limit is
-# defined because otherwise you'll spend more time re-flushing a too small cache
-# than working
-# c.TerminalInteractiveShell.cache_size = 1000
-
-# Automatically call the pdb debugger after every exception.
-# c.TerminalInteractiveShell.pdb = False
+## Set the log level by value or name.
+#c.Application.log_level = 30
 
 #------------------------------------------------------------------------------
-# PromptManager configuration
+# BaseIPythonApplication(Application) configuration
 #------------------------------------------------------------------------------
 
-# This is the primary interface for producing IPython's prompts.
+## IPython: an enhanced interactive Python shell.
 
-# Output prompt. '\#' will be transformed to the prompt number
-c.PromptManager.out_template = '<<< '
+## Whether to create profile dir if it doesn't exist
+#c.BaseIPythonApplication.auto_create = False
 
-# Continuation prompt.
-c.PromptManager.in2_template = '... '
+## Whether to install the default config files into the profile dir. If a new
+#  profile is being created, and IPython contains config files for that profile,
+#  then they will be staged into the new directory.  Otherwise, default config
+#  files will be automatically generated.
+#c.BaseIPythonApplication.copy_config_files = False
 
-# If True (default), each prompt will be right-aligned with the preceding one.
-c.PromptManager.justify = False
-
-# Input prompt.  '\#' will be transformed to the prompt number
-c.PromptManager.in_template = '>>> '
-
+## Path to an extra config file to load.
 #
-# c.PromptManager.color_scheme = 'Linux'
+#  If specified, load this config file in addition to any other IPython config.
+#c.BaseIPythonApplication.extra_config_file = u''
+
+## The name of the IPython directory. This directory is used for logging
+#  configuration (through profiles), history storage, etc. The default is usually
+#  $HOME/.ipython. This option can also be specified through the environment
+#  variable IPYTHONDIR.
+#c.BaseIPythonApplication.ipython_dir = u''
+
+## Whether to overwrite existing config files when copying
+#c.BaseIPythonApplication.overwrite = False
+
+## The IPython profile to use.
+#c.BaseIPythonApplication.profile = u'default'
+
+## Create a massive crash report when IPython encounters what may be an internal
+#  error.  The default is to append a short message to the usual traceback
+#c.BaseIPythonApplication.verbose_crash = False
 
 #------------------------------------------------------------------------------
-# ProfileDir configuration
+# IPKernelApp(BaseIPythonApplication,InteractiveShellApp,ConnectionFileMixin) configuration
 #------------------------------------------------------------------------------
 
-# An object to manage the profile directory and its resources.
-#
-# The profile directory is used by all IPython applications, to manage
-# configuration, logging and security.
-#
-# This object knows how to find, create and manage these directories. This
-# should be used by any code that wants to handle profiles.
+## IPython: an enhanced interactive Python shell.
 
-# Set the profile location directly. This overrides the logic used by the
-# `profile` option.
-# c.ProfileDir.location = u''
+## The importstring for the DisplayHook factory
+#c.IPKernelApp.displayhook_class = 'ipykernel.displayhook.ZMQDisplayHook'
 
-#------------------------------------------------------------------------------
-# PlainTextFormatter configuration
-#------------------------------------------------------------------------------
+## ONLY USED ON WINDOWS Interrupt this process when the parent is signaled.
+#c.IPKernelApp.interrupt = 0
 
-# The default pretty-printer.
+## The Kernel subclass to be used.
 #
-# This uses :mod:`IPython.external.pretty` to compute the format data of the
-# object. If the object cannot be pretty printed, :func:`repr` is used. See the
-# documentation of :mod:`IPython.external.pretty` for details on how to write
-# pretty printers.  Here is a simple example::
-#
-#     def dtype_pprinter(obj, p, cycle):
-#         if cycle:
-#             return p.text('dtype(...)')
-#         if hasattr(obj, 'fields'):
-#             if obj.fields is None:
-#                 p.text(repr(obj))
-#             else:
-#                 p.begin_group(7, 'dtype([')
-#                 for i, field in enumerate(obj.descr):
-#                     if i > 0:
-#                         p.text(',')
-#                         p.breakable()
-#                     p.pretty(field)
-#                 p.end_group(7, '])')
+#  This should allow easy re-use of the IPKernelApp entry point to configure and
+#  launch kernels other than IPython's own.
+#c.IPKernelApp.kernel_class = 'ipykernel.ipkernel.IPythonKernel'
 
-# PlainTextFormatter will inherit config from: BaseFormatter
+## redirect stderr to the null device
+#c.IPKernelApp.no_stderr = False
 
-#
-# c.PlainTextFormatter.type_printers = {}
+## redirect stdout to the null device
+#c.IPKernelApp.no_stdout = False
 
-#
-# c.PlainTextFormatter.newline = '\n'
+## The importstring for the OutStream factory
+#c.IPKernelApp.outstream_class = 'ipykernel.iostream.OutStream'
 
-#
-# c.PlainTextFormatter.float_precision = ''
-
-#
-# c.PlainTextFormatter.verbose = False
-
-#
-# c.PlainTextFormatter.deferred_printers = {}
-
-#
-# c.PlainTextFormatter.pprint = True
-
-#
-# c.PlainTextFormatter.max_width = 79
-
-#
-# c.PlainTextFormatter.singleton_printers = {}
+## kill this process if its parent dies.  On Windows, the argument specifies the
+#  HANDLE of the parent process, otherwise it is simply boolean.
+#c.IPKernelApp.parent_handle = 0
 
 #------------------------------------------------------------------------------
-# IPCompleter configuration
+# Kernel(SingletonConfigurable) configuration
 #------------------------------------------------------------------------------
 
-# Extension of the completer class with IPython-specific features
+## Whether to use appnope for compatiblity with OS X App Nap.
+#
+#  Only affects OS X >= 10.9.
+#c.Kernel._darwin_app_nap = True
 
-# IPCompleter will inherit config from: Completer
+##
+#c.Kernel._execute_sleep = 0.0005
 
-# Instruct the completer to omit private method names
-#
-# Specifically, when completing on ``object.<tab>``.
-#
-# When 2 [default]: all names that start with '_' will be excluded.
-#
-# When 1: all 'magic' names (``__foo__``) will be excluded.
-#
-# When 0: nothing will be excluded.
-c.IPCompleter.omit__names = 1
+##
+#c.Kernel._poll_interval = 0.05
 
-# Whether to merge completion results into a single list
-#
-# If False, only the completion results from the first non-empty completer will
-# be returned.
-c.IPCompleter.merge_completions = True
+#------------------------------------------------------------------------------
+# IPythonKernel(Kernel) configuration
+#------------------------------------------------------------------------------
 
-# Activate greedy completion
+#------------------------------------------------------------------------------
+# InteractiveShell(SingletonConfigurable) configuration
+#------------------------------------------------------------------------------
+
+## An enhanced, interactive shell for Python.
+
+## 'all', 'last', 'last_expr' or 'none', specifying which nodes should be run
+#  interactively (displaying output from expressions).
+#c.InteractiveShell.ast_node_interactivity = 'last_expr'
+
+## A list of ast.NodeTransformer subclass instances, which will be applied to
+#  user input before code is run.
+#c.InteractiveShell.ast_transformers = []
+
+## Make IPython automatically call any callable object even if you didn't type
+#  explicit parentheses. For example, 'str 43' becomes 'str(43)' automatically.
+#  The value can be '0' to disable the feature, '1' for 'smart' autocall, where
+#  it is not applied if there are no more arguments on the line, and '2' for
+#  'full' autocall, where all callable objects are automatically called (even if
+#  no arguments are present).
+#c.InteractiveShell.autocall = 0
+
+## Autoindent IPython code entered interactively.
+#c.InteractiveShell.autoindent = True
+
+## Enable magic commands to be called without the leading %.
+#c.InteractiveShell.automagic = True
+
+## The part of the banner to be printed before the profile
+#c.InteractiveShell.banner1 = 'Python 2.7.12 (default, Oct  3 2016, 09:00:07) \nType "copyright", "credits" or "license" for more information.\n\nIPython 5.1.0 -- An enhanced Interactive Python.\n?         -> Introduction and overview of IPython\'s features.\n%quickref -> Quick reference.\nhelp      -> Python\'s own help system.\nobject?   -> Details about \'object\', use \'object??\' for extra details.\n'
+
+## The part of the banner to be printed after the profile
+c.InteractiveShell.banner1 = ''
+c.InteractiveShell.banner2 = ''
+
+## Set the size of the output cache.  The default is 1000, you can change it
+#  permanently in your config file.  Setting it to 0 completely disables the
+#  caching system, and the minimum value accepted is 20 (if you provide a value
+#  less than 20, it is reset to 0 and a warning is issued).  This limit is
+#  defined because otherwise you'll spend more time re-flushing a too small cache
+#  than working
+#c.InteractiveShell.cache_size = 1000
+
+## Use colors for displaying information about objects. Because this information
+#  is passed through a pager (like 'less'), and some pagers get confused with
+#  color codes, this capability can be turned off.
+#c.InteractiveShell.color_info = True
+
+## Set the color scheme (NoColor, Neutral, Linux, or LightBG).
+#c.InteractiveShell.colors = 'Neutral'
+
+##
+#c.InteractiveShell.debug = False
+
+## **Deprecated**
 #
-# This will enable completion on elements of lists, results of function calls,
-# etc., but can be unsafe because the code is actually evaluated on TAB.
-# c.IPCompleter.greedy = False
+#  Will be removed in IPython 6.0
+#
+#  Enable deep (recursive) reloading by default. IPython can use the deep_reload
+#  module which reloads changes in modules recursively (it replaces the reload()
+#  function, so you don't need to change anything to use it). `deep_reload`
+#  forces a full reload of modules whose code may have changed, which the default
+#  reload() function does not.  When deep_reload is off, IPython will use the
+#  normal reload(), but deep_reload will still be available as dreload().
+#c.InteractiveShell.deep_reload = False
+
+## Don't call post-execute functions that have failed in the past.
+#c.InteractiveShell.disable_failing_post_execute = False
+
+## If True, anything that would be passed to the pager will be displayed as
+#  regular output instead.
+#c.InteractiveShell.display_page = False
+
+## (Provisional API) enables html representation in mime bundles sent to pagers.
+#c.InteractiveShell.enable_html_pager = False
+
+## Total length of command history
+#c.InteractiveShell.history_length = 10000
+
+## The number of saved history entries to be loaded into the history buffer at
+#  startup.
+#c.InteractiveShell.history_load_length = 1000
+
+##
+#c.InteractiveShell.ipython_dir = ''
+
+## Start logging to the given file in append mode. Use `logfile` to specify a log
+#  file to **overwrite** logs to.
+#c.InteractiveShell.logappend = ''
+
+## The name of the logfile to use.
+#c.InteractiveShell.logfile = ''
+
+## Start logging to the default log file in overwrite mode. Use `logappend` to
+#  specify a log file to **append** logs to.
+#c.InteractiveShell.logstart = False
+
+##
+#c.InteractiveShell.object_info_string_level = 0
+
+## Automatically call the pdb debugger after every exception.
+#c.InteractiveShell.pdb = False
+
+## Deprecated since IPython 4.0 and ignored since 5.0, set
+#  TerminalInteractiveShell.prompts object directly.
+#c.InteractiveShell.prompt_in1 = 'In [\\#]: '
+
+## Deprecated since IPython 4.0 and ignored since 5.0, set
+#  TerminalInteractiveShell.prompts object directly.
+#c.InteractiveShell.prompt_in2 = '   .\\D.: '
+
+## Deprecated since IPython 4.0 and ignored since 5.0, set
+#  TerminalInteractiveShell.prompts object directly.
+#c.InteractiveShell.prompt_out = 'Out[\\#]: '
+
+## Deprecated since IPython 4.0 and ignored since 5.0, set
+#  TerminalInteractiveShell.prompts object directly.
+#c.InteractiveShell.prompts_pad_left = True
+
+##
+#c.InteractiveShell.quiet = False
+
+##
+#c.InteractiveShell.separate_in = '\n'
+
+##
+#c.InteractiveShell.separate_out = ''
+
+##
+#c.InteractiveShell.separate_out2 = ''
+
+## Show rewritten input, e.g. for autocall.
+#c.InteractiveShell.show_rewritten_input = True
+
+## Enables rich html representation of docstrings. (This requires the docrepr
+#  module).
+#c.InteractiveShell.sphinxify_docstring = False
+
+##
+#c.InteractiveShell.wildcards_case_sensitive = True
+
+##
+#c.InteractiveShell.xmode = 'Context'
+
+#------------------------------------------------------------------------------
+# ZMQInteractiveShell(InteractiveShell) configuration
+#------------------------------------------------------------------------------
+
+## A subclass of InteractiveShell for ZMQ.
+
+#------------------------------------------------------------------------------
+# ProfileDir(LoggingConfigurable) configuration
+#------------------------------------------------------------------------------
+
+## An object to manage the profile directory and its resources.
+#
+#  The profile directory is used by all IPython applications, to manage
+#  configuration, logging and security.
+#
+#  This object knows how to find, create and manage these directories. This
+#  should be used by any code that wants to handle profiles.
+
+## Set the profile location directly. This overrides the logic used by the
+#  `profile` option.
+#c.ProfileDir.location = u''
+
+#------------------------------------------------------------------------------
+# Session(Configurable) configuration
+#------------------------------------------------------------------------------
+
+## Object for handling serialization and sending of messages.
+#
+#  The Session object handles building messages and sending them with ZMQ sockets
+#  or ZMQStream objects.  Objects can communicate with each other over the
+#  network via Session objects, and only need to work with the dict-based IPython
+#  message spec. The Session will handle serialization/deserialization, security,
+#  and metadata.
+#
+#  Sessions support configurable serialization via packer/unpacker traits, and
+#  signing with HMAC digests via the key/keyfile traits.
+#
+#  Parameters ----------
+#
+#  debug : bool
+#      whether to trigger extra debugging statements
+#  packer/unpacker : str : 'json', 'pickle' or import_string
+#      importstrings for methods to serialize message parts.  If just
+#      'json' or 'pickle', predefined JSON and pickle packers will be used.
+#      Otherwise, the entire importstring must be used.
+#
+#      The functions must accept at least valid JSON input, and output *bytes*.
+#
+#      For example, to use msgpack:
+#      packer = 'msgpack.packb', unpacker='msgpack.unpackb'
+#  pack/unpack : callables
+#      You can also set the pack/unpack callables for serialization directly.
+#  session : bytes
+#      the ID of this Session object.  The default is to generate a new UUID.
+#  username : unicode
+#      username added to message headers.  The default is to ask the OS.
+#  key : bytes
+#      The key used to initialize an HMAC signature.  If unset, messages
+#      will not be signed or checked.
+#  keyfile : filepath
+#      The file containing a key.  If this is set, `key` will be initialized
+#      to the contents of the file.
+
+## Threshold (in bytes) beyond which an object's buffer should be extracted to
+#  avoid pickling.
+#c.Session.buffer_threshold = 1024
+
+## Whether to check PID to protect against calls after fork.
+#
+#  This check can be disabled if fork-safety is handled elsewhere.
+#c.Session.check_pid = True
+
+## Threshold (in bytes) beyond which a buffer should be sent without copying.
+#c.Session.copy_threshold = 65536
+
+## Debug output in the Session
+#c.Session.debug = False
+
+## The maximum number of digests to remember.
+#
+#  The digest history will be culled when it exceeds this value.
+#c.Session.digest_history_size = 65536
+
+## The maximum number of items for a container to be introspected for custom
+#  serialization. Containers larger than this are pickled outright.
+#c.Session.item_threshold = 64
+
+## execution key, for signing messages.
+#c.Session.key = ''
+
+## path to file containing execution key.
+#c.Session.keyfile = ''
+
+## Metadata dictionary, which serves as the default top-level metadata dict for
+#  each message.
+#c.Session.metadata = {}
+
+## The name of the packer for serializing messages. Should be one of 'json',
+#  'pickle', or an import name for a custom callable serializer.
+#c.Session.packer = 'json'
+
+## The UUID identifying this session.
+#c.Session.session = u''
+
+## The digest scheme used to construct the message signatures. Must have the form
+#  'hmac-HASH'.
+#c.Session.signature_scheme = 'hmac-sha256'
+
+## The name of the unpacker for unserializing messages. Only used with custom
+#  functions for `packer`.
+#c.Session.unpacker = 'json'
+
+## Username for the Session. Default is your system username.
+#c.Session.username = u'zk'
+# sample ipython_config.py
+
+c.TerminalIPythonApp.display_banner = False
