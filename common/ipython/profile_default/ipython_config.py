@@ -466,3 +466,4 @@ c.InteractiveShell.banner2 = ''
 # sample ipython_config.py
 
 c.TerminalIPythonApp.display_banner = False
+c.TerminalInteractiveShell.editing_mode = 'vi'
