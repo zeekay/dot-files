@@ -8,8 +8,8 @@
     "underscore"
   ],
   "plugins": {
-    "coffee": {},
-    "complete_strings": {},
+    "commonjs": {},
+    "es_modules": {},
     "modules": {},
     "node": {},
     "node_resolve": {}
