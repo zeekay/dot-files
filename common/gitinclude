@@ -79,7 +79,8 @@
     statusHints     = false
 
 [branch]
-    autosetupmerge  = true
+    autosetupmerge   = always
+    autosetuprebase  = always
 
 [push]
     default         = simple
@@ -88,7 +89,7 @@
     autosquash      = true
 
 [rerere]
-    enabled         = false
+    enabled         = true
 
 [credential]
 	helper = cache --timeout=31536000
