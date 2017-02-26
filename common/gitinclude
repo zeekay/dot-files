@@ -113,4 +113,7 @@
 [gist]
     browse          = true
 
+[http "https://gopkg.in"]
+	followRedirects = true
+
 # vim: ft=gitconfig
