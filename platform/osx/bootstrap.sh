@@ -282,6 +282,12 @@ defaults write com.twitter.twitter-mac openLinksInBackground -bool true
 # Allow closing the ‘new tweet’ window by pressing `Esc`
 defaults write com.twitter.twitter-mac ESCClosesComposeWindow -bool true
 
+# Disable game center cruft
+defaults write com.apple.gamed Disabled -bool true
+
 # setup dev lookups to use dnsmasq
 sudo mkdir -v /etc/resolver
 sudo bash -c 'echo "nameserver 127.0.0.1" > /etc/resolver/dev'
+
+# Disable spotlight suggestions
+curl https://fix-macosx.com/fix-macosx.py | python
