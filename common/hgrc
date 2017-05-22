@@ -17,14 +17,14 @@ track.current = True
 
 [extensions]
 churn =
-collapse =
+# collapse =
 color =
 fetch =
 graphlog =
 rebase =
 record =
-histedit = ~/.hgext/hg_histedit.py
-collapse = ~/.hgext/collapse.py
+# histedit = ~/.hgext/hg_histedit.py
+# collapse = ~/.hgext/collapse.py
 # hgsubversion =
 
 [alias]
