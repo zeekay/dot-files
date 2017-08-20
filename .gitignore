@@ -1,4 +1,5 @@
 *.pyc
+*.log
 common/ghc/ghci_history
 common/ghc/x86_64-darwin-*
 common/ipython/README
@@ -11,3 +12,6 @@ common/ipython/profile_haskell/
 common/matplotlib/fontList.cache
 common/mpv/watch_later
 platform/osx/alfred/Alfred.alfredpreferences/workflows/alfred-github-workflow
+common/config/stetic/library-cache/
+common/config/config-store
+common/config/gcloud
