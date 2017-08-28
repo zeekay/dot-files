@@ -12,9 +12,9 @@
                 },
                 "rules": [
                     {
+                        "description": "Change caps_lock to control if pressed with other keys, to escape if pressed alone.",
                         "manipulators": [
                             {
-                                "description": "Change caps_lock to control when used as modifier, escape when used alone",
                                 "from": {
                                     "key_code": "caps_lock",
                                     "modifiers": {
@@ -30,12 +30,7 @@
                                 ],
                                 "to_if_alone": [
                                     {
-                                        "key_code": "escape",
-                                        "modifiers": {
-                                            "optional": [
-                                                "any"
-                                            ]
-                                        }
+                                        "key_code": "escape"
                                     }
                                 ],
                                 "type": "basic"
@@ -60,13 +55,11 @@
                 "f9": "fastforward"
             },
             "name": "Default profile",
-            "one_to_many_mappings": {},
             "selected": true,
             "simple_modifications": {},
             "virtual_hid_keyboard": {
                 "caps_lock_delay_milliseconds": 0,
-                "keyboard_type": "ansi",
-                "standalone_keys_delay_milliseconds": 100
+                "keyboard_type": "ansi"
             }
         }
     ]
