@@ -1,0 +1,1 @@
+/Users/zk/.ellipsis/packages/vim/nvimrc
