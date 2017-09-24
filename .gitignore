@@ -15,3 +15,4 @@ platform/osx/alfred/Alfred.alfredpreferences/workflows/alfred-github-workflow
 common/config/stetic/library-cache/
 common/config/config-store
 common/config/gcloud
+common/config/configstore/update-notifier-npm4-check-updates.json
