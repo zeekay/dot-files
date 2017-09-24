@@ -48,6 +48,7 @@
     push-new        = !git push -u origin `git rev-parse --abbrev-ref HEAD`
     record          = !sh -c '(git add -p -- $@ && git commit) || git reset' --
     reset-origin    = !git fetch && git reset --hard "origin/`git rev-parse --abbrev-ref HEAD`"
+    reset-author    = commit --amend --reset-author --no-edit
     ribbon          = tag --force _ribbon origin/master
     root            = !pwd
     serve           = daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
