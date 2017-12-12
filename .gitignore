@@ -16,3 +16,6 @@ common/config/stetic/library-cache/
 common/config/config-store
 common/config/gcloud
 common/config/configstore/update-notifier-npm4-check-updates.json
+common/config/configstore/update-notifier-npm-check-updates.json
+common/config/configstore/update-notifier-npm.json
+common/config/xbuild/

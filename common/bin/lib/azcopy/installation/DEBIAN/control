@@ -1,0 +1,8 @@
+Package: azcopy
+Version: 7.0.0-netcorepreview
+Section: admin
+Architecture: all
+Depends: dotnet-sdk-2.0.0(>= 2.0.0)
+Installed-Size: 9896
+Maintainer: AzCopy Dev<azcopydev@microsoft.com>
+Description: Transferring data from/to azure storage blob/file
