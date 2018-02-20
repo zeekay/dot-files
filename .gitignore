@@ -20,3 +20,4 @@ common/config/configstore/update-notifier-npm-check-updates.json
 common/config/configstore/update-notifier-npm.json
 common/config/xbuild/
 common/config/hub
+common/config/gocode/config.json
