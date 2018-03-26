@@ -1,5 +1,12 @@
 *.pyc
 *.log
+common/config/config-store
+common/config/configstore
+common/config/gcloud
+common/config/gocode/config.json
+common/config/hub
+common/config/stetic/library-cache/
+common/config/xbuild/
 common/ghc/ghci_history
 common/ghc/x86_64-darwin-*
 common/ipython/README
@@ -12,12 +19,3 @@ common/ipython/profile_haskell/
 common/matplotlib/fontList.cache
 common/mpv/watch_later
 platform/osx/alfred/Alfred.alfredpreferences/workflows/alfred-github-workflow
-common/config/stetic/library-cache/
-common/config/config-store
-common/config/gcloud
-common/config/configstore/update-notifier-npm4-check-updates.json
-common/config/configstore/update-notifier-npm-check-updates.json
-common/config/configstore/update-notifier-npm.json
-common/config/xbuild/
-common/config/hub
-common/config/gocode/config.json
