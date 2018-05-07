@@ -3,45 +3,71 @@ ruby -e "$(curl -fsSkL raw.github.com/mxcl/homebrew/go)"
 
 export PATH=/usr/local/bin:$PATH
 
-# Use homebrew to install a few necessities
+# Homebrew
+brew tap ethereum/ethereum
+
 brew install libevent
 brew link libevent
+
+brew install openssl
+brew link openssl
+
+# Use homebrew to install a few necessities
 brew install \
     ack \
+    awscli \
+    azure-cli \
+    bash \
     cloc \
     clojure \
     cmake \
     cowsay \
     ctags \
+    curl \
     dos2unix \
     elinks \
     sshfs \
     gnu-sed \
+    gist \
     git \
     haskell-platform \
+    heroku \
     html2text \
     https://raw.github.com/Homebrew/homebrew-games/master/nethack.rb \
     hub \
+    idris \
+    irssi \
+    jq \
+    kubernetes-cli \
+    kubernetes-helm \
     lame \
     leiningen \
+    leveldb \
     libev \
+    lua \
+    luajit \
     macvim \
     mercurial \
     mkvtoolnix \
     mongodb \
+    msgpack \
     netcat \
+    neovim \
     node \
+    ncurses \
     pianobar \
     postgresql \
     pypy \
+    python@2 \
     python \
-    python3 \
     readline \
     redis \
     repl \
     rhino \
+    rlwrap \
     riak \
     ruby \
+    solidity \
     spidermonkey \
     ssh-copy-id \
     sshfs \
@@ -51,6 +77,10 @@ brew install \
     vimpager \
     watch \
     wget \
+    wrk \
+    youtube-dl \
+    x264 \
+    xz \
     z \
     zeromq
 
@@ -85,16 +115,20 @@ curl http://npmjs.org/install.sh | sh
 npm install -g \
     cdir \
     chai \
-    coffee-script \
+    coffeescript \
     coffeelint \
     csslint \
     docco \
+    eslint \
+    ganache-cli \
     html2jade \
     jitsu \
     js2coffee \
-    jshint \
     jsontool \
-    mocha
+    mocha \
+    solhint \
+    solium \
+    truffle
 
 # Ruby gems
 gem install CoffeeTags
