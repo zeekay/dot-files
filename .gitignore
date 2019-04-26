@@ -6,7 +6,9 @@ common/config/gcloud
 common/config/gocode/config.json
 common/config/hub
 common/config/stetic/library-cache/
+common/config/truffle/
 common/config/xbuild/
+common/fonts/.uuid
 common/ghc/ghci_history
 common/ghc/x86_64-darwin-*
 common/ipython/README
@@ -17,5 +19,6 @@ common/ipython/profile_default/startup/README
 common/ipython/profile_default/static/
 common/ipython/profile_haskell/
 common/matplotlib/fontList.cache
+common/matplotlib/fontList.json
 common/mpv/watch_later
 platform/osx/alfred/Alfred.alfredpreferences/workflows/alfred-github-workflow
