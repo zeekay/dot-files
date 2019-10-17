@@ -5,6 +5,7 @@ common/config/configstore
 common/config/gcloud
 common/config/gocode/config.json
 common/config/hub
+common/config/karabiner/automatic_backups
 common/config/stetic/library-cache/
 common/config/truffle/
 common/config/xbuild/
