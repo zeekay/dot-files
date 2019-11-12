@@ -80,8 +80,8 @@
     statusHints     = false
 
 [branch]
-    autosetupmerge   = always
-    autosetuprebase  = always
+    autosetupmerge  = always
+    autosetuprebase = always
 
 [push]
     default         = simple
