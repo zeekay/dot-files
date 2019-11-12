@@ -93,7 +93,7 @@
     enabled         = true
 
 [credential]
-	helper = cache --timeout=31536000
+	helper          = cache --timeout=31536000
 
 [grep]
     lineNumber      = true
@@ -115,6 +115,6 @@
     browse          = true
 
 [http "https://gopkg.in"]
-	followRedirects = true
+    followRedirects = true
 
 # vim: ft=gitconfig
