@@ -1,0 +1,7 @@
+agr() {
+    ag -0 -l "$from" "${@}" | prefiles "$from" "$to"
+}
+
+prefiles() {
+    AGR_FROM="$1" AGR_TO="$2" xargs -r0 perl -pi.bak -e 's/$ENV{AGR_FROM}/$ENV{AGR_TO}/g'
+}
