@@ -2,4 +2,5 @@
 --color-lineno=magenta
 --color-match=bold red
 --smart-case
---ignore-dir=node_modules
+--ignore-dir=node_modules,dist,build
+--ignore-file='match:stats.html'
