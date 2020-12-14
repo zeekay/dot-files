@@ -6,9 +6,11 @@ common/config/gcloud
 common/config/gocode/config.json
 common/config/hub
 common/config/karabiner/automatic_backups
+common/config/mdt/keys/mdt.key
 common/config/stetic/library-cache/
 common/config/truffle/
 common/config/xbuild/
+common/config/yarn/
 common/fonts/.uuid
 common/ghc/ghci_history
 common/ghc/x86_64-darwin-*
@@ -23,4 +25,3 @@ common/matplotlib/fontList.cache
 common/matplotlib/fontList.json
 common/mpv/watch_later
 platform/osx/alfred/Alfred.alfredpreferences/workflows/alfred-github-workflow
-common/config/mdt/keys/mdt.key
