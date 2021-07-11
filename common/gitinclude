@@ -31,7 +31,7 @@
     sb              = show-branch
     st              = status -s
 
-    catchup         = log --patch --reverse --topo-order _ribbon..origin/master
+    catchup         = log --patch --reverse --topo-order _ribbon..origin/main
     changes         = diff --name-status -r
     current-branch  = !git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||'
     delete-merged   = !git pull --prune && git branch --merged | grep -v '*' | xargs -n 1 git branch -d
@@ -43,13 +43,13 @@
     lost            = !"git fsck | awk '/dangling commit/ {print $3}' | git show --format='SHA1: %C(yellow)%h%Cblue%d%Creset %s %C(white)%an, %ar%Creset' --stdin | awk '/SHA1/ {sub(\"SHA1: \", \"\"); print}'"
     merge-ours      = !git checkout --ours   . && git add -u && git commit
     merge-theirs    = !git checkout --theirs . && git add -u && git commit
-    new             = !hub create && git push --set-upstream origin master
+    new             = !hub create && git push --set-upstream origin main
     pop             = stash pop
     push-new        = !git push -u origin `git rev-parse --abbrev-ref HEAD`
     record          = !sh -c '(git add -p -- $@ && git commit) || git reset' --
     reset-origin    = !git fetch && git reset --hard "origin/`git rev-parse --abbrev-ref HEAD`"
     reset-author    = commit --amend --reset-author --no-edit
-    ribbon          = tag --force _ribbon origin/master
+    ribbon          = tag --force _ribbon origin/main
     root            = !pwd
     serve           = daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
     stage           = add
