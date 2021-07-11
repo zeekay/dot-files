@@ -4,3 +4,4 @@
 --smart-case
 --ignore-dir=node_modules,dist,build
 --ignore-file='match:stats.html'
+--pager='less -R -S'
