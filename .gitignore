@@ -1,5 +1,6 @@
-*.pyc
 *.log
+*.pyc
+common/config/.mono/keypairs/
 common/config/config-store
 common/config/configstore
 common/config/gcloud

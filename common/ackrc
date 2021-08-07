@@ -3,5 +3,6 @@
 --color-match=bold red
 --smart-case
 --ignore-dir=node_modules,dist,build
+--ignore-directory=is:node_modules
 --ignore-file='match:stats.html'
 --pager='less -R -S'
