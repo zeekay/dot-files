@@ -1,1 +1,1 @@
-/Users/zk/.ellipsis/packages/vim/nvimrc
+/Users/z/.ellipsis/packages/vim/nvimrc
