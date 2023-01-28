@@ -1,0 +1,40 @@
+{
+  "title": "Spotify Rewire",
+  "rules": [
+    {
+      "description": "Maps the play pause media key to Spotify",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": { "key_code": "f7" },
+          "to": [
+            {
+              "shell_command": "osascript -e 'tell application \"Spotify\" to previous track'",
+              "repeat": false
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": { "key_code": "f8" },
+          "to": [
+            {
+              "shell_command": "osascript -e 'tell application \"Spotify\" to playpause'",
+              "repeat": false
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": { "key_code": "f9" },
+          "to": [
+            {
+              "shell_command": "osascript -e 'tell application \"Spotify\" to next track'",
+              "repeat": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

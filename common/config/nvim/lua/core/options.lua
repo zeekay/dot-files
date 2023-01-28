@@ -42,7 +42,7 @@ astronvim.vim_opts(astronvim.user_plugin_opts("options", {
   },
   g = {
     do_filetype_lua = 1, -- use filetype.lua
-    did_load_filetypes = 0, -- don't use filetype.vim
+    did_load_filetypes = 1, -- don't use filetype.vim
     highlighturl_enabled = true, -- highlight URLs by default
     mapleader = " ", -- set leader key
     zipPlugin = false, -- disable zip

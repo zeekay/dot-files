@@ -286,3 +286,5 @@ map("n", "J", "<c-d>", { desc = "PageDown" })
 map("n", "K", "<c-u>", { desc = "PageUp" })
 map("n", "\\q", "<cmd>q<cr>", { desc = "Quit" })
 map("n", "\\w", "<C-w>", { desc = "Window commands" })
+
+map("n", ";", ":", { desc = "Semi remap" })
