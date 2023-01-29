@@ -111,8 +111,12 @@
                     },
                     "ignore": true,
                     "manipulate_caps_lock_led": true,
+<<<<<<< HEAD
                     "simple_modifications": [],
                     "treat_as_built_in_keyboard": false
+=======
+                    "simple_modifications": []
+>>>>>>> 7d97433 (Switch over to spacevim)
                 },
                 {
                     "disable_built_in_keyboard_if_exists": false,
@@ -125,8 +129,12 @@
                     },
                     "ignore": false,
                     "manipulate_caps_lock_led": true,
+<<<<<<< HEAD
                     "simple_modifications": [],
                     "treat_as_built_in_keyboard": false
+=======
+                    "simple_modifications": []
+>>>>>>> 7d97433 (Switch over to spacevim)
                 },
                 {
                     "disable_built_in_keyboard_if_exists": false,
@@ -139,6 +147,7 @@
                     },
                     "ignore": true,
                     "manipulate_caps_lock_led": false,
+<<<<<<< HEAD
                     "simple_modifications": [],
                     "treat_as_built_in_keyboard": false
                 },
@@ -169,6 +178,9 @@
                     "manipulate_caps_lock_led": false,
                     "simple_modifications": [],
                     "treat_as_built_in_keyboard": false
+=======
+                    "simple_modifications": []
+>>>>>>> 7d97433 (Switch over to spacevim)
                 }
             ],
             "fn_function_keys": [
