@@ -1,6 +1,7 @@
 common/config/nvim
 *.log
 *.pyc
+*.zwc
 common/config/.mono/keypairs/
 common/config/config-store
 common/config/configstore
