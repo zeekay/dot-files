@@ -75,7 +75,9 @@ format = "[$symbol$branch]($style) "
 
 [nodejs]
 symbol = " "
-format = "[$symbol]($style)"
+format = "[ $version](bold green) "
+detect_files = ["package.json", ".node-version"]
+detect_folders = ["node_modules"]
 
 [aws]
 symbol = " "
@@ -143,11 +145,6 @@ format = "[$symbol]($style)"
 
 [ruby]
 symbol = " "
-format = "[$symbol]($style)"
-
-[rust]
-symbol = " "
-style = "130"                # brown
 format = "[$symbol]($style)"
 
 [swift]
