@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+/Applications/Visual\ Studio\ Code.app/Contents/MacOS/Electron $1 &
