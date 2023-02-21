@@ -1,3 +1,5 @@
+continuation_prompt = "▶▶"
+
 # A minimal left prompt
 format = """$character"""
 
@@ -65,8 +67,13 @@ add_newline = false
 disabled = true
 
 [character]
-success_symbol = "[⏷](bold white)"
-error_symbol = "[⏷](bold red)"
+success_symbol = "[⏵](bold white)"
+error_symbol = "[⏵](bold red)"
+vicmd_symbol = '[⏷](bold white)'
+
+[directory]
+truncation_length = 100
+truncate_to_repo = false
 
 [git_branch]
 symbol = " "
