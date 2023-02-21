@@ -1,3 +1,4 @@
+common/config/nvim
 *.log
 *.pyc
 common/config/.mono/keypairs/
