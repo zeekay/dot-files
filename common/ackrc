@@ -5,3 +5,4 @@
 --ignore-dir=node_modules/
 --ignore-dir=dist/
 --ignore-dir=build/
+--ignore-dir=.next
