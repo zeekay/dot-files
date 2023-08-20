@@ -7,3 +7,4 @@
 --ignore-dir=build/
 --ignore-dir=.next
 --ignore-dir=.autodoc
+--ignore-dir=.contentlayer
