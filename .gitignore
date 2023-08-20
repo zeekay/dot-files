@@ -12,6 +12,7 @@ common/config/karabiner/automatic_backups
 common/config/mdt/keys/mdt.key
 common/config/stetic/library-cache/
 common/config/truffle/
+common/config/gspread/
 common/config/xbuild/
 common/config/yarn/
 common/fonts/.uuid
