@@ -1,5 +1,0 @@
-# Use 32MB input cache for everything, even local files.
-cache=32768
-
-# Use 64MB cache for network streams only.
-cache-default=65536
