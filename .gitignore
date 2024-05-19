@@ -30,3 +30,6 @@ common/matplotlib/fontList.json
 common/mpv/watch_later
 platform/osx/alfred/Alfred.alfredpreferences/workflows/alfred-github-workflow
 common/config/openai.token
+common/config/zed/.tmp*
+common/config/zed/embeddings/*
+common/config/github-copilot/hosts.json
