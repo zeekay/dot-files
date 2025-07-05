@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/new-window.tsx", "../src/uri.ts"],
+  "sourcesContent": ["import { open } from \"@raycast/api\";\nimport { getNewWindowUri } from \"./uri\";\n\nexport default async function Command() {\n  await open(getNewWindowUri(\"~\"));\n}\n", "import { getPreferenceValues } from \"@raycast/api\";\n\nconst getWarpUri = (path: string) => {\n  const { warpApp } = getPreferenceValues<ExtensionPreferences>();\n  const scheme = warpApp === \"preview\" ? \"warppreview://\" : \"warp://\";\n  return `${scheme}${path}`;\n};\n\nexport const getNewTabUri = (path: string) => getWarpUri(`action/new_tab?path=${encodeURIComponent(path)}`);\nexport const getNewWindowUri = (path: string) => getWarpUri(`action/new_window?path=${encodeURIComponent(path)}`);\nexport const getLaunchConfigUri = (path: string) => getWarpUri(`launch/${encodeURIComponent(path)}`);\n"],
+  "mappings": "yaAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,aAAAE,IAAA,eAAAC,EAAAH,GAAA,IAAAI,EAAqB,wBCArB,IAAAC,EAAoC,wBAE9BC,EAAcC,GAAiB,CACnC,GAAM,CAAE,QAAAC,CAAQ,KAAI,uBAA0C,EAE9D,MAAO,GADQA,IAAY,UAAY,iBAAmB,SAC1C,GAAGD,CAAI,EACzB,EAGO,IAAME,EAAmBC,GAAiBC,EAAW,0BAA0B,mBAAmBD,CAAI,CAAC,EAAE,EDNhH,eAAOE,GAAiC,CACtC,QAAM,QAAKC,EAAgB,GAAG,CAAC,CACjC",
+  "names": ["new_window_exports", "__export", "Command", "__toCommonJS", "import_api", "import_api", "getWarpUri", "path", "warpApp", "getNewWindowUri", "path", "getWarpUri", "Command", "getNewWindowUri"]
+}

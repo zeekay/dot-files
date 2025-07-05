@@ -1,0 +1,157 @@
+#!/bin/bash
+
+# Detect OS
+OS="unknown"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    OS="macos"
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    OS="linux"
+fi
+
+# Function to get system hostname
+get_hostname() {
+    if command -v hostname >/dev/null 2>&1; then
+        hostname -s 2>/dev/null || hostname 2>/dev/null || echo "unknown"
+    else
+        echo "unknown"
+    fi
+}
+
+HOSTNAME=$(get_hostname)
+
+# Check if ngrok is running using multiple methods
+check_ngrok_running() {
+    # Method 1: Check ngrok API
+    if curl -s http://localhost:4040/api/tunnels >/dev/null 2>&1; then
+        return 0
+    fi
+    
+    # Method 2: Check process
+    if pgrep -x ngrok >/dev/null 2>&1; then
+        # Ngrok process exists but API might not be ready
+        echo "⏳ Ngrok process found but API not responding yet..."
+        return 1
+    fi
+    
+    return 2
+}
+
+# Get ngrok tunnel info
+if ! check_ngrok_running; then
+    echo "❌ Ngrok is not running"
+    echo ""
+    echo "Start it with:"
+    case "$OS" in
+        macos)
+            echo "  launchctl load ~/Library/LaunchAgents/com.ngrok.ssh.plist"
+            echo "  OR"
+            echo "  ngrok tcp 22"
+            ;;
+        linux)
+            echo "  sudo systemctl start ngrok-ssh"
+            echo "  OR"
+            echo "  ngrok tcp 22"
+            ;;
+        *)
+            echo "  ngrok tcp 22"
+            ;;
+    esac
+    exit 1
+fi
+
+TUNNEL_INFO=$(curl -s http://localhost:4040/api/tunnels 2>/dev/null)
+
+# Parse the public URL - handle both single and multiple tunnels
+PUBLIC_URL=$(echo "$TUNNEL_INFO" | python3 -c "
+import json, sys
+try:
+    data = json.load(sys.stdin)
+    if data.get('tunnels'):
+        # Find SSH tunnel (port 22) or first TCP tunnel
+        ssh_tunnel = None
+        for tunnel in data['tunnels']:
+            if tunnel.get('proto') == 'tcp':
+                config = tunnel.get('config', {})
+                if 'localhost:22' in config.get('addr', '') or ':22' in config.get('addr', ''):
+                    ssh_tunnel = tunnel
+                    break
+        
+        # If no SSH tunnel found, use first TCP tunnel
+        if not ssh_tunnel:
+            for tunnel in data['tunnels']:
+                if tunnel.get('proto') == 'tcp':
+                    ssh_tunnel = tunnel
+                    break
+        
+        if ssh_tunnel:
+            url = ssh_tunnel['public_url']
+            # Extract host and port from tcp://X.tcp.ngrok.io:PORT
+            parts = url.replace('tcp://', '').split(':')
+            host = parts[0]
+            port = parts[1] if len(parts) > 1 else '22'
+            print(f'{host}:{port}')
+        else:
+            print('No TCP tunnels found')
+    else:
+        print('No tunnels found')
+except:
+    print('Error parsing tunnels')
+" 2>/dev/null)
+
+if [[ "$PUBLIC_URL" == "No tunnels found" ]] || [[ "$PUBLIC_URL" == "No TCP tunnels found" ]] || [[ "$PUBLIC_URL" == "Error parsing tunnels" ]]; then
+    echo "❌ No ngrok SSH tunnels found"
+    echo ""
+    echo "Make sure ngrok is running with: ngrok tcp 22"
+    exit 1
+fi
+
+HOST=$(echo "$PUBLIC_URL" | cut -d: -f1)
+PORT=$(echo "$PUBLIC_URL" | cut -d: -f2)
+
+# Generate a nice alias name based on hostname
+ALIAS="ssh-$(echo "$HOSTNAME" | tr '[:upper:]' '[:lower:]')"
+
+echo "🌐 SSH Connection Info for $HOSTNAME"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "Host: $HOST"
+echo "Port: $PORT"
+echo "System: $OS"
+echo ""
+echo "📋 SSH Command:"
+echo "ssh -p $PORT $(whoami)@$HOST"
+echo ""
+echo "🔐 Add to ~/.ssh/config:"
+echo "Host $ALIAS"
+echo "    HostName $HOST"
+echo "    Port $PORT"
+echo "    User $(whoami)"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+# Show service management tips
+echo ""
+echo "💡 Service Management:"
+case "$OS" in
+    macos)
+        if launchctl list | grep -q ngrok; then
+            echo "✅ Ngrok service is loaded (launchd)"
+        else
+            echo "○ Load service: launchctl load ~/Library/LaunchAgents/com.ngrok.ssh.plist"
+        fi
+        ;;
+    linux)
+        if systemctl is-active --quiet ngrok-ssh 2>/dev/null; then
+            echo "✅ Ngrok service is active (systemd)"
+        elif systemctl list-unit-files | grep -q ngrok-ssh 2>/dev/null; then
+            echo "○ Start service: sudo systemctl start ngrok-ssh"
+        else
+            echo "○ No systemd service found - running manually?"
+        fi
+        ;;
+esac
+
+# Check if this is a paid ngrok account (stable URLs)
+if echo "$TUNNEL_INFO" | grep -q '"proto":"tcp".*"addr":".*:22"'; then
+    echo ""
+    echo "📌 Note: Free ngrok URLs change on restart."
+    echo "   Consider ngrok paid plan for stable URLs."
+fi
