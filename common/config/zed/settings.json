@@ -7,11 +7,31 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "icon_theme": "Catppuccin Mocha",
+  "features": {
+    "edit_prediction_provider": "zed"
+  },
+  "agent": {
+    "default_model": {
+      "provider": "openai",
+      "model": "o3-mini"
+    },
+    "version": "2"
+  },
+  "jupyter": {
+    "kernel_selections": {
+      "python": "conda-env",
+      "typescript": "deno",
+      "javascript": "deno",
+      "r": "ark"
+    }
+  },
+  "theme": "Catppuccin Mocha",
   "telemetry": {
     "diagnostics": false,
     "metrics": false
   },
   "vim_mode": true,
   "ui_font_size": 16,
-  "buffer_font_size": 16
+  "buffer_font_size": 13.0
 }

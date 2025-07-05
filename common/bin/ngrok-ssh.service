@@ -1,0 +1,16 @@
+[Unit]
+Description=Ngrok SSH Tunnel
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/ngrok tcp 22
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=ngrok-ssh
+User=%i
+
+[Install]
+WantedBy=multi-user.target

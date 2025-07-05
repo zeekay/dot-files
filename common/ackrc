@@ -8,3 +8,4 @@
 --ignore-dir=.next
 --ignore-dir=.autodoc
 --ignore-dir=.contentlayer
+--ignore-dir=.venv

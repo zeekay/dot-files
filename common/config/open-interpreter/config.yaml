@@ -1,0 +1,9 @@
+open_ai:
+  api_key: 
+  model: gpt-4
+anthropic:
+  api_key: 
+  model: claude-v1
+interpreter:
+  streaming: true
+  safe_mode: true
