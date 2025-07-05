@@ -5,9 +5,7 @@ common/config/nvim
 common/config/.mono/keypairs/
 common/config/config-store
 common/config/configstore
-common/config/gcloud
 common/config/gocode/config.json
-common/config/hub
 common/config/karabiner/automatic_backups
 common/config/mdt/keys/mdt.key
 common/config/stetic/library-cache/
@@ -29,7 +27,6 @@ common/matplotlib/fontList.cache
 common/matplotlib/fontList.json
 common/mpv/watch_later
 platform/osx/alfred/Alfred.alfredpreferences/workflows/alfred-github-workflow
-common/config/openai.token
 common/config/zed/.tmp*
 common/config/zed/embeddings/*
 common/config/github-copilot/hosts.json
